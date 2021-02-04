@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { filter, tap } from 'rxjs/operators';
 import { CourseDialogComponent } from '../course-dialog/course-dialog.component';
+import { LoadingService } from '../loading/loading.service';
 import { Course } from '../model/course';
 
 @Component({
@@ -17,7 +18,7 @@ export class CoursesCardListComponent implements OnInit {
   @Output()
   private coursesChanged = new EventEmitter();
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private loadingService: LoadingService) { }
 
   ngOnInit(): void {
   }
