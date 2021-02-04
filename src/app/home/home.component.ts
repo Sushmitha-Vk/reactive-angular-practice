@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {CourseDialogComponent} from '../course-dialog/course-dialog.component';
 import { CourseService } from '../services/course.service';
+import { LoadingService } from '../loading/loading.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit {
   advancedCourses$: Observable<Course[]>;
 
 
-  constructor(private http: HttpClient, private courseService: CourseService) {
+  constructor(private courseService: CourseService, private loadingService: LoadingService) {
 
   }
 
@@ -29,14 +30,16 @@ export class HomeComponent implements OnInit {
   }
 
   reloadCourses() {
+    this.loadingService.loadingOn();
     const courses$ = this.courseService.loadAllCourses()
       .pipe(
         map(res => res.sort(sortCoursesBySeqNo))
       );
-    this.beginnerCourses$ = courses$.pipe(
+    const loading$ = this.loadingService.showLoaderUntilComplete(courses$);
+    this.beginnerCourses$ = loading$.pipe(
       map(res => res.filter(course => course.category === 'BEGINNER'))
     );
-    this.advancedCourses$ = courses$.pipe(
+    this.advancedCourses$ = loading$.pipe(
       map(res => res.filter(course => course.category === 'ADVANCED'))
     );
   }
