@@ -35,6 +35,8 @@ import {SearchLessonsComponent} from './search-lessons/search-lessons.component'
 import { LoadingComponent } from './loading/loading.component';
 import { CourseService } from './services/course.service';
 import { CoursesCardListComponent } from './courses-card-list/courses-card-list.component';
+import { LoadingService } from './loading/loading.service';
+import { MessagesService } from './messages/messages.service';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,8 @@ import { CoursesCardListComponent } from './courses-card-list/courses-card-list.
     ReactiveFormsModule
   ],
   providers: [
-    CourseService
+    LoadingService,
+    MessagesService
   ],
   bootstrap: [AppComponent],
   entryComponents: [CourseDialogComponent]
