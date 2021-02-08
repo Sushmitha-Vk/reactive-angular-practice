@@ -80,7 +80,7 @@ import { MessagesService } from './messages/messages.service';
   ],
   providers: [
     LoadingService,
-    MessagesService
+    MessagesService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [CourseDialogComponent]
