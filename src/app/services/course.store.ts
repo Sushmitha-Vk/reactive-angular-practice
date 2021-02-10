@@ -50,6 +50,7 @@ export class CourseStore {
             catchError(err => {
                 const message = 'Could not save the changes';
                 this.messagesService.showErrors(message);
+                this.subject.next(courses);
                 return throwError(err);
             }),
             shareReplay()
